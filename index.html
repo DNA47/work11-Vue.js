@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/styles.css">
+    <title>WORK 11 - vue</title>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+        <!-- Значение поля хранится в атрибуте submit -->
+
+        <div class="formWrap">
+            <form action="#" @submit.prevent="handleSubmit">
+                <h2>Текст новой записи</h2>
+                <label>
+                    <textarea rows="4" class="input_field" name="post_message" @keyup="checkValueLength" ref="textarea"></textarea>
+                </label>
+                <div class="submitWrapper">
+                    <div class="textLimitter" v-bind:class="textLimitterClass"  v-show="this.symbolCounter !== 0"> {{symbolCounter}} / 144 </div>
+                    <input type="submit" value="Добавить" v-bind:class="btnClassName"  class="submitBtn"  :disabled='this.symbolCounter < 1'>
+                </div>
+                
+            </form>
+            
+        </div>
+        
+        <section class="recordsWrp">
+            <h2 v-if="records.length==0">Нет записей</h2>
+            <h2  v-else-if="records.length==1">Запись</h2>
+            <h2  v-else>
+                Записи
+                <span class="counter" v-show="records.length > 1">
+                    {{ records.length }}
+                </span>
+            </h2>
+           
+
+            <ul class="recordsList">
+                <li v-for="record in records" :key="record.id" class="recordItem" >
+                   <p class="recordMsg">{{ record.text }}</p>
+                   <p class="recordDate">{{ record.date }}</p>
+                    
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
